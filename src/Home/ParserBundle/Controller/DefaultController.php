@@ -5,6 +5,8 @@ namespace Home\ParserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Guzzle\Http\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\CssSelector\CssSelector;
+
 
 class DefaultController extends Controller
 {
@@ -50,25 +52,28 @@ class DefaultController extends Controller
                 ));*/
 
     // Responses are objects
-            echo $response->getStatusCode() . ' ' . $response->getReasonPhrase() . "\n";
+//            echo $response->getStatusCode() . ' ' . $response->getReasonPhrase() . "\n";
 
     // Requests and responses can be cast to a string to show the raw HTTP message
-//            echo $request . "\n\n" . $response;
-
-    // Create a request based on an HTTP message
-        $crawler = new Crawler();
-        $crawler->addContent($response);
-
-        print $crawler->filterXPath('descendant-or-self::body/p')->text();
+            echo $request . "\n\n" . $response;
 
 
-       /* $html = $response;
+        $crawler = new Crawler($response);
+        $document = new \DOMDocument();
+        $document->loadHTML($response);
+        $nodeList = $document->getElementsByTagName('node');
+        $node = $document->getElementsByTagName('node')->item(0);
 
-        $crawler = new Crawler($html);
+        $crawler->addDocument($document);
+        $crawler->addNodeList($nodeList);
+        $crawler->addNodes(array($node));
+        $crawler->addNode($node);
+        $crawler->add($document);
+
 
         foreach ($crawler as $domElement) {
             print $domElement->nodeName;
         }
-        return 4;*/
+
     }
 }
