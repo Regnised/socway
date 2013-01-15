@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b4137a95-6e77-4796-98ff-cc9a4c03460b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Home/ParserBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Home/ParserBundle/Controller/DefaultController.php" />
     </list>
     <ignored path="hmw2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -301,7 +300,11 @@
       <created>1358283789051</created>
       <updated>1358283789051</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="error">
+      <created>1358287890717</created>
+      <updated>1358287890717</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -364,7 +367,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="error" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -378,6 +381,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="first commit" />
+    <MESSAGE value="error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
