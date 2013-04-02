@@ -20,7 +20,13 @@
         "kriswallsmith/assetic": "1.1.*@dev",
 		"guzzle/guzzle": "3.0.*",
         "jms/serializer-bundle": "0.9.0",
-        "friendsofsymfony/rest-bundle": "0.10.0"
+        "friendsofsymfony/rest-bundle": "0.10.0",
+        "behat/behat": "2.4.*@stable",
+        "behat/mink":  "1.4.*@stable",
+        "behat/symfony2-extension":     "*@stable",
+        "behat/mink-extension":         "*@stable",
+        "behat/mink-browserkit-driver": "dev-master",
+        "behat/mink-sahi-driver": "@dev"
 
     },
 
