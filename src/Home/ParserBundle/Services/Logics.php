@@ -34,29 +34,10 @@ class Logics extends Controller
     public function dbase($homeTeam, $awayTeam) {
 
 
-            $team = new Team();
-            $team2 = new Team();
+
 
 //            $em = $this->getDoctrine()->getManager();
-            $entities = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findByName($homeTeam);
-            $entities2 = $$this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findByName($awayTeam);
 
-
-            if (!$entities)
-            {
-            $team->setName($homeTeam);
-                $this->em->persist($team);
-            } else {
-                $team = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findOneByName($homeTeam);
-            }
-
-            if (!$entities2) {
-                $team2->setName($awayTeam);
-                $this->em->persist($team2);
-            }
-            else {
-                $team2 = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findOneByName($awayTeam);
-            }
 
 
     return  array($team, $team2);

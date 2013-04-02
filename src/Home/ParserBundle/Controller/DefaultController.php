@@ -53,15 +53,35 @@ class DefaultController extends Controller
                 $awayTeamName = $elBytagA->item(2)->getAttribute('title');
                 $em = $this->getDoctrine()->getManager();
 
-                $sort = $this->get('logic_serv');
-                $sorting = $sort->dbase($homeTeamName,$awayTeamName);
+
+                $team = new Team();
+                $team2 = new Team();
+                $entities = $em->getRepository('HomeParserBundle:Team')->findByName($homeTeamName);
+                $entities2 = $em->getRepository('HomeParserBundle:Team')->findByName($awayTeamName);
+
+
+                if (!$entities)
+                {
+                    $team->setName($homeTeamName);
+                    $this->em->persist($team);
+                } else {
+                    $team = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findOneByName($homeTeamName);
+                }
+
+                if (!$entities2) {
+                    $team2->setName($awayTeamName);
+                    $this->em->persist($team2);
+                }
+                else {
+                    $team2 = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findOneByName($awayTeamName);
+                }
 
                 $game = new Football();
                 $game->setDate(DateTime::createFromFormat('d/m/y', $dateGame));
                 $game->setHts($account{0});
                 $game->setAts($account{4});
-                $game->setFootballH($sorting[0]);
-                $game->setFootballA($sorting[1]);
+                $game->setFootballH($team);
+                $game->setFootballA($team2);
 
                 $em->persist($game);
                 $em->flush();
