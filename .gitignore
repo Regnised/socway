@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 web/bundles/
 app/bootstrap.php.cache
 app/cache/*
@@ -6,3 +7,18 @@ build/
 vendor
 composer.phar
 ./idea/
+=======
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+>>>>>>> f010dc03fc3384044f680ea82ae1ff23a7399d62
