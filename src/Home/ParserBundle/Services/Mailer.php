@@ -1,24 +1,20 @@
 <?php
-namespace Home\ParserBundle;
+namespace Home\ParserBundle\Services;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class Mailer extends Controller
 {
-// ...
-    public function __construct($a)
+    /**
+     * @param $sendmail
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Template
+     */
+    public function send($sendmail)
     {
-        $this->a = $a;
-
+        $sendmail = $sendmail + 1;
+        return $sendmail;
     }
-
-public function send($a)
-{
-    $a = $a + 1;
-    return new Response($a);
-
-
-}
 
 }

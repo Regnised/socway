@@ -1,3 +1,11 @@
 home_parser_homepage:
-    pattern:  /hello/{name}
+    pattern:  /
     defaults: { _controller: HomeParserBundle:Default:index }
+
+home_parser_standings:
+    pattern:  /standings
+    defaults: { _controller: HomeParserBundle:Default:standings, _format:json }
+
+home_parser_matches:
+    pattern:  /matches
+    defaults: { _controller: HomeParserBundle:Default:matches, _format:json }

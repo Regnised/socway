@@ -2,6 +2,7 @@ home_parser:
     resource: "@HomeParserBundle/Resources/config/routing.yml"
     prefix:   /
 
+
 # Internal routing configuration to handle ESI
 # ****** WARNING ******
 # This route should be enabled with caution as it can open a security vulnerability
@@ -10,3 +11,8 @@ home_parser:
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
+
+home_default_rest:
+    resource: Home\ParserBundle\Controller\DefaultController
+    prefix: /api
+    type: rest

@@ -4,17 +4,17 @@ namespace Home\ParserBundle\Services;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class Mailer extends Controller
+class Sort extends Controller
 {
     /**
-     * @param $sendmail
+     * @param $sorted
      * @return \Symfony\Component\HttpFoundation\Response
      * @Template
      */
-    public function send($sendmail)
-    {
-        $sendmail = $sendmail + 1;
-        return $sendmail;
+    function build_sorter($key) {
+        return function ($a, $b) use ($key) {
+            return strnatcmp($a[$key], $b[$key]);
+        };
     }
 
 }

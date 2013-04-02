@@ -58,3 +58,36 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+services:
+    my_mailer:
+        class:        Home\ParserBundle\Services\Mailer
+        arguments:    [sendmail]
+    sort_array:
+            class:        Home\ParserBundle\Services\Sort
+            arguments:    [sorted]
+    logic_serv:
+            class:        Home\ParserBundle\Services\Logics
+            arguments:    [homeTeam,awayTeam]
+
+fos_rest:
+    view:
+        view_response_listener: false
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: php
+        formats:
+            json: true
+    format_listener:
+        prefer_extension: true
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
+
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            FOSUserBundle:
+                namespace_prefix: FOS\ParserBundle
+                path: "@HomeParserBundle/Resources/config/serializer/fos"
+
