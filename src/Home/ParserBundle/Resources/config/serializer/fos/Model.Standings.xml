@@ -1,0 +1,12 @@
+<serializer>
+    <class name="FOS\ParserBundle\Model\Standings" exclusion-policy="all">
+        <property name="place" type="integer" expose="true" access-type="public_method"></property>
+        <property name="team" type="string" expose="true" access-type="public_method"></property>
+        <property name="played" type="integer" expose="true" access-type="public_method"></property>
+        <property name="wins" type="integer" expose="true" access-type="public_method"></property>
+        <property name="draws" type="integer" expose="true" access-type="public_method"></property>
+        <property name="losses" type="integer" expose="true" access-type="public_method"></property>
+        <property name="points" type="integer" expose="true" access-type="public_method"></property>
+    </class>
+</serializer>
+

@@ -1,0 +1,176 @@
+<?php
+
+namespace Home\ParserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Football
+ */
+class Football
+{
+
+
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     */
+    private $mydate;
+
+    /**
+     * @var string
+     */
+    private $hometeam;
+
+    /**
+     * @var string
+     */
+    private $awayteam;
+
+    /**
+     * @var integer
+     */
+    private $hts;
+
+    /**
+     * @var integer
+     */
+    private $ats;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set mydate
+     *
+     * @param \DateTime $mydate
+     * @return Football
+     */
+    public function setMydate($mydate)
+    {
+        $this->mydate = $mydate;
+    
+        return $this;
+    }
+
+    /**
+     * Get mydate
+     *
+     * @return \DateTime 
+     */
+    public function getMydate()
+    {
+        return $this->mydate;
+    }
+
+    /**
+     * Set hometeam
+     *
+     * @param string $hometeam
+     * @return Football
+     */
+    public function setHometeam($hometeam)
+    {
+        $this->hometeam = $hometeam;
+    
+        return $this;
+    }
+
+    /**
+     * Get hometeam
+     *
+     * @return string 
+     */
+    public function getHometeam()
+    {
+        return $this->hometeam;
+    }
+
+    /**
+     * Set awayteam
+     *
+     * @param string $awayteam
+     * @return Football
+     */
+    public function setAwayteam($awayteam)
+    {
+        $this->awayteam = $awayteam;
+    
+        return $this;
+    }
+
+    /**
+     * Get awayteam
+     *
+     * @return string 
+     */
+    public function getAwayteam()
+    {
+        return $this->awayteam;
+    }
+
+    /**
+     * Set hts
+     *
+     * @param integer $hts
+     * @return Football
+     */
+    public function setHts($hts)
+    {
+        $this->hts = $hts;
+    
+        return $this;
+    }
+
+    /**
+     * Get hts
+     *
+     * @return integer 
+     */
+    public function getHts()
+    {
+        return $this->hts;
+    }
+
+    /**
+     * Set ats
+     *
+     * @param integer $ats
+     * @return Football
+     */
+    public function setAts($ats)
+    {
+        $this->ats = $ats;
+    
+        return $this;
+    }
+
+    /**
+     * Get ats
+     *
+     * @return integer 
+     */
+    public function getAts()
+    {
+        return $this->ats;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="footballs")
+     * @ORM\JoinColumn(name="Name_id", referencedColumnName="id")
+     */
+    protected $team;
+}
