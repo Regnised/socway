@@ -21,4 +21,10 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isSuccessful());;
     }
+
+
+
+
+
+
 }

@@ -4,6 +4,7 @@ namespace Home\ParserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * FootballRepository
  *
@@ -12,6 +13,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class FootballRepository extends EntityRepository
 {
+
+
+
     public function findCountGames($teamId)
     {
         return $this->createQueryBuilder('f')

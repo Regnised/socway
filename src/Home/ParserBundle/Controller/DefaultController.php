@@ -63,14 +63,14 @@ class DefaultController extends Controller
                 if (!$entities)
                 {
                     $team->setName($homeTeamName);
-                    $this->em->persist($team);
+                    $em->persist($team);
                 } else {
                     $team = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findOneByName($homeTeamName);
                 }
 
                 if (!$entities2) {
                     $team2->setName($awayTeamName);
-                    $this->em->persist($team2);
+                    $em->persist($team2);
                 }
                 else {
                     $team2 = $this->container->get('doctrine')->getRepository('HomeParserBundle:Team')->findOneByName($awayTeamName);
