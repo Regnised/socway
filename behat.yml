@@ -1,0 +1,23 @@
+default:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            mink_driver: true
+        Behat\MinkExtension\Extension:
+            default_session: 'symfony2'
+            base_url: http://api.local
+
+
+#
+#default:
+#    extensions:
+#        Behat\Symfony2Extension\Extension:
+#             mink_driver: true
+##        VIPSoft\DoctrineDataFixturesExtension\Extension:
+##             fixtures: ~
+#        Behat\MinkExtension\Extension:
+## default_session: 'symfony2'
+#            default_session: 'sahi'
+#            base_url: http://api.local
+#            browser_name: chrome
+#            sahi:
+#                host: localhost
