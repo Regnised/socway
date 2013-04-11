@@ -17,6 +17,10 @@ use JMS\SerializerBundle\JMSSerializerBundle;
 use FOS\RestBundle\View\View;
 use Home\ParserBundle\Services\Mailer;
 
+use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+
 
 
 class DefaultController extends Controller
@@ -91,7 +95,17 @@ class DefaultController extends Controller
         return $this->render('HomeParserBundle:Default:index.html.twig');
     }
 
-    public function standingsAction() {
+    /**
+     * @QueryParam(name="from", requirements="\d{4}-\d{2}-\d{2}", default="2011-01-01", description="matches played from date")
+     * @QueryParam(name="to", requirements="\d{4}-\d{2}-\d{2}", default="2012-02-01", description="matches played to date")
+     *
+     * @param string $from, $to
+     *
+     */
+    public function standingsAction(ParamFetcher $paramFetcher) {
+//        var_dump($paramFetcher); exit;
+        $from = $paramFetcher->get('from');
+        $to = $paramFetcher->get('to');
         $em = $this->getDoctrine()->getManager();
         $teamNames = $em->getRepository('HomeParserBundle:Team')->findAll();
 
@@ -99,13 +113,13 @@ class DefaultController extends Controller
             $teamName = $team->getName();
             $teamId = $team->getId();
 
-            $countGames = $em->getRepository('HomeParserBundle:Football')->findCountGames($teamId);
+            $countGames = $em->getRepository('HomeParserBundle:Football')->findCountGames($teamId, $from, $to);
 //            echo $countGames . '-cGames-';
-            $countWins = $em->getRepository('HomeParserBundle:Football')->findCountWins($teamId);
+            $countWins = $em->getRepository('HomeParserBundle:Football')->findCountWins($teamId, $from, $to);
 //            echo '<-'.$countWins . '->';
-            $countDraws = $em->getRepository('HomeParserBundle:Football')->findCountDraws($teamId);
+            $countDraws = $em->getRepository('HomeParserBundle:Football')->findCountDraws($teamId, $from, $to);
 //            echo '<-'.$countDraws . '->';
-            $countLosses = $em->getRepository('HomeParserBundle:Football')->findCountLosses($teamId);
+            $countLosses = $em->getRepository('HomeParserBundle:Football')->findCountLosses($teamId, $from, $to);
 //            echo '<-'.$countLosses . '->';
             $summPoints = $countWins*3 + $countDraws;
 
@@ -142,9 +156,22 @@ class DefaultController extends Controller
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 
-    public function matchesAction() {
-        $em = $this->getDoctrine()->getManager();
-        $teamNames = $em->getRepository('HomeParserBundle:Football')->findAll();
+
+    /**
+     * @QueryParam(name="team", requirements="\w+", description="all matches one team")
+     *
+     * @param string $team
+     *
+     */
+    public function matchesAction(ParamFetcher $paramFetcher) {
+        $team = $paramFetcher->get('team');
+
+//        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()
+            ->getRepository('HomeParserBundle:Football');
+
+//        $teamNames = $em->getRepository('HomeParserBundle:Football')->findAll();
+        $teamNames = $repository->findTeamGames($team);
 
         foreach ($teamNames as $game) {
             $arrayData[] = array(

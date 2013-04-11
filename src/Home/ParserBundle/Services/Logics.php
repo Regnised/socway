@@ -3,44 +3,20 @@ namespace Home\ParserBundle\Services;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Home\ParserBundle\Entity\Team;
-use Guzzle\Http\Client;
-use Symfony\Component\CssSelector\CssSelector;
-use Guzzle\Common\Exception\ExceptionCollection;
-use Symfony\Component\Validator\Validation;
-
 
 class Logics extends Controller
 {
     /**
+     * @QueryParam(name="from", requirements="\w+", default="2011-01-01", description="matches played from date")
+     * @QueryParam(name="to", requirements="\w+", default="2012-02-01", description="matches played to date")
      *
-     * @param $homeTeam, $awayTeam
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Template
+     * @param string $from, $to
+     *
+     * @return $from, $to
      */
+    public function getDateRange($from, $to)
+    {
 
-
-    /**
-     * @var EntityManager
-     */
-    protected  $container;
-
-    public function __construct() {
-        $this->container = $this->getDoctrine()->getManager();
-//        $this->em = $this->container->get('doctrine');
-    }
-
-
-    public function dbase($homeTeam, $awayTeam) {
-
-
-
-
-//            $em = $this->getDoctrine()->getManager();
-
-
-
-    return  array($team, $team2);
-
+        return array('from' => $from, 'to' => $to);
     }
 }

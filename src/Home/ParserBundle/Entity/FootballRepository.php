@@ -16,7 +16,7 @@ class FootballRepository extends EntityRepository
 
 
 
-    public function findCountGames($teamId)
+    public function findCountGames($teamId, $from, $to)
     {
         return $this->createQueryBuilder('f')
             ->select('count(f.id)')
@@ -24,12 +24,12 @@ class FootballRepository extends EntityRepository
             ->orwhere( 'f.football_a = ?0')
             ->andwhere('f.date > ?1')
             ->andwhere('f.date < ?2')
-            ->setParameters(array($teamId, '2011-01-01', '2012-12-01'))
+            ->setParameters(array($teamId, $from, $to))
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    public function findCountWins($teamId)
+    public function findCountWins($teamId, $from, $to)
     {
         $em = $this->getEntityManager();
 
@@ -37,8 +37,8 @@ class FootballRepository extends EntityRepository
             'SELECT f FROM HomeParserBundle:Football f WHERE ((f.football_h = :football and f.hts > f.ats) or
                 (f.football_a = :football and f.hts < f.ats)) and (f.date > :datefrom and f.date < :dateto)')
         ->setParameter('football', $teamId)
-        ->setParameter('datefrom', '2011-01-01')
-        ->setParameter('dateto', '2012-12-12')
+        ->setParameter('datefrom', $from)
+        ->setParameter('dateto',$to)
         ;
         $games = $query->getResult();
         $count_wins = count($games);
@@ -46,7 +46,7 @@ class FootballRepository extends EntityRepository
         return  $count_wins;
     }
 
-    public function findCountDraws($teamId)
+    public function findCountDraws($teamId, $from, $to)
     {
         $em = $this->getEntityManager();
 
@@ -54,8 +54,8 @@ class FootballRepository extends EntityRepository
             'SELECT f FROM HomeParserBundle:Football f WHERE ((f.football_h = :football and f.hts = f.ats) or
                 (f.football_a = :football and f.hts = f.ats)) and (f.date > :datefrom and f.date < :dateto)'
         )->setParameter('football', $teamId)
-            ->setParameter('datefrom', '2011-01-01')
-            ->setParameter('dateto', '2012-12-12')
+            ->setParameter('datefrom', $from)
+            ->setParameter('dateto', $to)
         ;
         $games = $query->getResult();
         $count_draws = count($games);
@@ -64,7 +64,7 @@ class FootballRepository extends EntityRepository
 
     }
 
-    public function findCountLosses($teamId)
+    public function findCountLosses($teamId, $from, $to)
     {
         $em = $this->getEntityManager();
 
@@ -72,13 +72,26 @@ class FootballRepository extends EntityRepository
             'SELECT f FROM HomeParserBundle:Football f WHERE ((f.football_h = :football and f.hts < f.ats) or
                 (f.football_a = :football and f.hts > f.ats)) and (f.date > :datefrom and f.date < :dateto)')
             ->setParameter('football', $teamId)
-            ->setParameter('datefrom', '2011-01-01')
-            ->setParameter('dateto', '2012-12-12')
+            ->setParameter('datefrom', $from)
+            ->setParameter('dateto', $to)
         ;
         $games = $query->getResult();
         $count_losses = count($games);
 
         return $count_losses;
+    }
+
+    public function findTeamGames($team)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT f FROM HomeParserBundle:Football f WHERE (f.football_h = :team) or (f.football_a = :team)')
+            ->setParameter('team', 1)
+        ;
+        $team = $query->getResult();
+
+        return $team;
     }
 
 

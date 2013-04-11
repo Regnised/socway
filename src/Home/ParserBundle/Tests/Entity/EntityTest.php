@@ -21,11 +21,11 @@ class EntityTest extends WebTestCase
     public function CountGames()
     {
         return array(
-            array("1", "39"),
-            array("2", "39"),
-            array("3", "39"),
-            array("4", "39"),
-            array("5", "38"),
+            array("1", "113"),
+            array("2", "113"),
+            array("3", "114"),
+            array("4", "114"),
+            array("5", "114"),
         );
     }
 

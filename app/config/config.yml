@@ -82,6 +82,7 @@ fos_rest:
     body_listener:
         decoders:
             json: fos_rest.decoder.json
+    param_fetcher_listener: true
 
 jms_serializer:
     metadata:
