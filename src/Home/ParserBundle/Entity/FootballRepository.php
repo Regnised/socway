@@ -81,13 +81,13 @@ class FootballRepository extends EntityRepository
         return $count_losses;
     }
 
-    public function findTeamGames($team)
+    public function findTeamGames($teamId)
     {
         $em = $this->getEntityManager();
 
         $query = $em->createQuery(
             'SELECT f FROM HomeParserBundle:Football f WHERE (f.football_h = :team) or (f.football_a = :team)')
-            ->setParameter('team', 1)
+            ->setParameter('team', $teamId)
         ;
         $team = $query->getResult();
 

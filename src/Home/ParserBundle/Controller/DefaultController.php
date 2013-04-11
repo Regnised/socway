@@ -103,7 +103,6 @@ class DefaultController extends Controller
      *
      */
     public function standingsAction(ParamFetcher $paramFetcher) {
-//        var_dump($paramFetcher); exit;
         $from = $paramFetcher->get('from');
         $to = $paramFetcher->get('to');
         $em = $this->getDoctrine()->getManager();
@@ -114,13 +113,9 @@ class DefaultController extends Controller
             $teamId = $team->getId();
 
             $countGames = $em->getRepository('HomeParserBundle:Football')->findCountGames($teamId, $from, $to);
-//            echo $countGames . '-cGames-';
             $countWins = $em->getRepository('HomeParserBundle:Football')->findCountWins($teamId, $from, $to);
-//            echo '<-'.$countWins . '->';
             $countDraws = $em->getRepository('HomeParserBundle:Football')->findCountDraws($teamId, $from, $to);
-//            echo '<-'.$countDraws . '->';
             $countLosses = $em->getRepository('HomeParserBundle:Football')->findCountLosses($teamId, $from, $to);
-//            echo '<-'.$countLosses . '->';
             $summPoints = $countWins*3 + $countDraws;
 
             $arrayData[] = array(
@@ -150,28 +145,34 @@ class DefaultController extends Controller
         $view->setFormat('json');
         $view->setData($arrayData);
 
-//        $mailer = $this->get('my_mailer');
-//        $test = $mailer->send(1);
-
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 
 
     /**
-     * @QueryParam(name="team", requirements="\w+", description="all matches one team")
+     * @QueryParam(name="team", requirements="", description="all matches one team")
      *
      * @param string $team
      *
      */
     public function matchesAction(ParamFetcher $paramFetcher) {
-        $team = $paramFetcher->get('team');
-
-//        $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()
+        $teamNamme = $paramFetcher->get('team');
+//        echo $teamNamme;exit;
+        $repositoryFootball = $this->getDoctrine()
             ->getRepository('HomeParserBundle:Football');
+        $repositoryTeam = $this->getDoctrine()
+            ->getRepository('HomeParserBundle:Team');
 
-//        $teamNames = $em->getRepository('HomeParserBundle:Football')->findAll();
-        $teamNames = $repository->findTeamGames($team);
+        $teamName = $repositoryTeam->findOneByName($teamNamme);
+//        echo $teamName;exit;
+        foreach ($teamName as $teamN) {
+            $teamId = $teamN->getId();
+        }
+
+
+        $teamId = $teamName->getId();
+
+        $teamNames = $repositoryFootball->findTeamGames($teamId);
 
         foreach ($teamNames as $game) {
             $arrayData[] = array(
@@ -181,7 +182,6 @@ class DefaultController extends Controller
                 "goalH" => $game->getHts(),
                 "goalA" => $game->getAts()
             );
-//            print_r(date_format($q3, 'Y-m-d ') . $q1 . " ||| " . $q4 . ":" . $q5 . " ||| " .$q2. "<br>");
         }
 
         $view = View::create();
